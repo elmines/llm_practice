@@ -1,15 +1,13 @@
+import os
+import pdb
+
+# input(f"The current process ID is {os.getpid()}. Press enter to continue")
+
+print("importing vllm")
 from vllm import LLM
-from vllm.sampling_params import BeamSearchParams
-
-def main():
-    llm = LLM(model="facebook/opt-125m")
-    params = BeamSearchParams(beam_width=5, max_tokens=50)
-    # outputs = llm.generate("Hello, my name is")
-    outputs = llm.beam_search([{"prompt": "Hello, my name is "}], params)
-    for output in outputs:
-        generated_text = output.sequences[0].text
-        print(f"Prompt: {generated_text}")
-
-
-if __name__ == "__main__":
-    main()
+print("Setting environment params")
+import vllm.envs as venvs; venvs.VLLM_ENABLE_V1_MULTIPROCESSING = False
+print("Setting pdb trace")
+pdb.set_trace()
+# llm = LLM(model="facebook/opt-125m")
+llm = LLM(model="openai/gpt-oss-20b")
