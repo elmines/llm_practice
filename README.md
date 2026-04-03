@@ -12,12 +12,15 @@ You'll have to run this command *any* time you use this codebase (not just durin
 Install the [`uv`](https://docs.astral.sh/uv/#installation) package manager if you don't have it:
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
+echo 'unset UV_PYTHON" >> ~/.bashrc
 ```
 
 Use it to create a virtual environment:
 ```bash
-uv venv
-uv sync
+uv python install 3.12
+uv venv -p 3.12 --managed-python
+source .venv/bin/activate
+uv sync -p $(which python)
 ```
 This will create a local `.venv/` directory.
 Run `source .venv/bin/activate` to activate the environment and `deactivate` to deactivate it.
